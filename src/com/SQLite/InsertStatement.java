@@ -5,10 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class InsertStatement extends SelectStatement implements DataBaseCommunication{
-
-    private Connection conn;
-    private Statement stat;
+public class InsertStatement extends CreateStatement implements DataBaseCommunication{
 
     public boolean insertCompetition (String dateOfCompetition, String typeOfCompetition, String id_Location) {
         try {
@@ -26,6 +23,21 @@ public class InsertStatement extends SelectStatement implements DataBaseCommunic
         return true;
     }
 
+    public boolean insertTypesOfCompetition (String dateOfCompetition, String typeOfCompetition, String id_Location) {
+        try {
+            PreparedStatement prepStmt = conn.prepareStatement(
+                    "insert into Competition values (NULL, ?, ?, ?);");
+            prepStmt.setString(1, dateOfCompetition);
+            prepStmt.setString(2, typeOfCompetition);
+            prepStmt.setString(3, id_Location);
+            prepStmt.execute();
+        } catch (SQLException e) {
+            System.err.println("Error - Values not insert into table Competition");
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
     public boolean insertTypesOfCompetition(String typeOfCompetition, String nameOfCompetition) {
         try {
@@ -41,6 +53,8 @@ public class InsertStatement extends SelectStatement implements DataBaseCommunic
         }
         return true;
     }
+
+
 
 
     public boolean insertCompetition_Referee(String id_Competition, String id_Referee) {

@@ -6,10 +6,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CreateStatement extends InsertStatement implements DataBaseCommunication{
+public class CreateStatement  implements DataBaseCommunication{
 
-    private Connection conn;
-    private Statement stat;
+    Connection conn;
+    Statement stat;
 
     public CreateStatement() {
 
@@ -38,8 +38,8 @@ public class CreateStatement extends InsertStatement implements DataBaseCommunic
                 "CREATE TABLE IF NOT EXISTS `Competition` ( " +
                         "id_Competition INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                         "`dateOfCompetition` varchar(255) NOT NULL," +
-                        "`typeOfCompetition` varchar(255)  NOT NULL," +
-                        " `id_Location` INT NOT NULL," +
+                        "`typeOfCompetition` text," +
+                        " `id_Location` INT ," +
                         " FOREIGN KEY(`id_Location`) REFERENCES `Location` (`id_Location`)" +
                         "ON DELETE CASCADE ON UPDATE NO ACTION," +
                         "FOREIGN KEY(`typeOfCompetition`) REFERENCES `TypesOfCompetition` (`typeOfCompetition`)" +
@@ -49,14 +49,14 @@ public class CreateStatement extends InsertStatement implements DataBaseCommunic
 
         String createTypesOfCompetition =
                 "CREATE TABLE IF NOT EXISTS `TypesOfCompetition` (" +
-                        "`typeOfCompetition` varchar(255) PRIMARY KEY  NOT NULL," +
-                        "`nameOfCompetition` varchar(255)  NOT NULL" +
+                        "`typeOfCompetition` text PRIMARY KEY not null," +
+                        "`nameOfCompetition` varchar(255) " +
                         ")";
 
         String createCompetition_Referee =
                 "CREATE TABLE IF NOT EXISTS `Competition_Referee` (" +
-                        "`id_Competition` INT NOT NULL," +
-                        "`id_Referee` INT NOT NULL," +
+                        "`id_Competition` INT ," +
+                        "`id_Referee` INT ," +
                         "PRIMARY KEY(`id_Competition`,`id_Referee`)," +
                         "FOREIGN KEY(`id_Competition`) REFERENCES `Competition` (`id_Competition`)" +
                         "ON DELETE CASCADE ON UPDATE NO ACTION," +
@@ -66,8 +66,8 @@ public class CreateStatement extends InsertStatement implements DataBaseCommunic
 
         String createCompetition_Team =
                 "CREATE TABLE IF NOT EXISTS `Competition_Team` (" +
-                        "`id_Team` INT NOT NULL," +
-                        "`id_Competition` INT NOT NULL," +
+                        "`id_Team` INT ," +
+                        "`id_Competition` INT ," +
                         "PRIMARY KEY(`id_Competition`,`id_Team`)," +
                         "FOREIGN KEY(`id_Team`) REFERENCES `Team` (`id_Team`)" +
                         "ON DELETE CASCADE ON UPDATE NO ACTION," +
@@ -84,8 +84,8 @@ public class CreateStatement extends InsertStatement implements DataBaseCommunic
 
         String createContestant_Team =
                 "CREATE TABLE IF NOT EXISTS `Contestant_Team` (" +
-                        " `id_Contestant` INT  NOT NULL," +
-                        "`id_Team` INT  NOT NULL," +
+                        " `id_Contestant` INT  ," +
+                        "`id_Team` INT  ," +
                         "PRIMARY KEY(`id_Contestant`,`id_Team`)," +
                         "FOREIGN KEY(`id_Contestant`) REFERENCES `Contestant` (`id_Contestant`)" +
                         "ON DELETE CASCADE ON UPDATE NO ACTION," +
@@ -96,14 +96,14 @@ public class CreateStatement extends InsertStatement implements DataBaseCommunic
         String createLocation =
                 "CREATE TABLE IF NOT EXISTS `Location` (" +
                         "`id_Location` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                        "`city` varchar(255)  NOT NULL," +
+                        "`city` varchar(255)," +
                         "FOREIGN KEY(`city`) REFERENCES `Skating_Rink` (`city`)" +
                         "ON DELETE CASCADE ON UPDATE NO ACTION" +
                         ")";
 
         String createSkating_Rink =
                 "CREATE TABLE IF NOT EXISTS `Skating_Rink` (" +
-                        "`city`  varchar(255) PRIMARY KEY  NOT NULL," +
+                        "`city`  varchar(255) PRIMARY KEY NOT NULL," +
                         "`country` varchar(255)  NOT NULL," +
                         "`name` varchar(255)  NOT NULL" +
                         ")";
@@ -113,8 +113,8 @@ public class CreateStatement extends InsertStatement implements DataBaseCommunic
                         "`id_Mark` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                         "`score_PC` INT NOT NULL," +
                         "`score_TE` INT NOT NULL," +
-                        "`id_Score` INT NOT NULL," +
-                        "`id_Referee` INT NOT NULL," +
+                        "`id_Score` INT ," +
+                        "`id_Referee` INT ," +
                         "FOREIGN KEY(`id_Score`) REFERENCES `Score` (`id_Score`)" +
                         "ON DELETE CASCADE ON UPDATE NO ACTION," +
                         "FOREIGN KEY(`id_Referee`) REFERENCES `Referee` (`id_Referee`)" +
@@ -132,8 +132,8 @@ public class CreateStatement extends InsertStatement implements DataBaseCommunic
                 "CREATE TABLE IF NOT EXISTS `Score` (" +
                         "`id_Score`  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                         "`score` int NOT NULL," +
-                        "`typeOfProgramme` varchar(255)  NOT NULL," +
-                        "`id_Team` INT NOT NULL," +
+                        "`typeOfProgramme` varchar(255) ," +
+                        "`id_Team` INT ," +
                         "FOREIGN KEY(id_Team) REFERENCES `Team` (`id_Team`)" +
                         "ON DELETE CASCADE ON UPDATE NO ACTION" +
                         ")";

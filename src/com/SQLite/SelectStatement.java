@@ -7,10 +7,8 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SelectStatement implements DataBaseCommunication {
+public class SelectStatement extends InsertStatement implements DataBaseCommunication {
 
-    private Connection conn;
-    private Statement stat;
 
     public List<Competition> selectCompetition() {
         List<Competition> list_Competition = new LinkedList<Competition>();

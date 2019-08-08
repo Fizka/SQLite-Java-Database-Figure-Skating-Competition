@@ -2,8 +2,8 @@ package com.SQLite;
 
 public class TypesOfCompetition {
 
-    String nameOfCompetition, typeOfCompetition; //varchar(50) NOT NULL
-// `typeOfCompetition` enum('Mistrzostwa Europy','Grand Prix','Mistrzostwa Swiata','Olimpiada') COLLATE utf8_unicode_ci NOT NULL,
+    String nameOfCompetition, typeOfCompetition; // NOT NULL
+// `typeOfCompetition` enum('Mistrzostwa Europy','Grand Prix','Mistrzostwa Swiata','Olimpiada')
 
     public TypesOfCompetition(String typeOfCompetition, String nameOfCompetition ) {
         this.nameOfCompetition = nameOfCompetition;
